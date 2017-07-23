@@ -72,12 +72,10 @@ configwifi-iface
 11.  按照需求，安装以下软件包：
 
 基础使用：openssh-sftp-server git zip usbutils luci-i18n-base-zh-cn luci-i18n-commands-zh-cn
-
 无线网卡: kmod-rt2500-usb kmod-rt2800-lib kmod-rt2800-usb kmod-rt2x00-lib kmod-rt2x00-usb kmod-rt73-usb kmod-rtl8187 kmod-rtl8192c-common kmod-rtl8192cu   kmod-rtlwifi-usb kmod-rtlwifi wireless-tools kmod-lib80211 kmod-net-rtl8188eu kmod-net-rtl8192su kmod-mac80211 kmod-ath9k-htc kmod-ath9k-common hostapd-utils hostapd fstools wpa-supplicant-p2p wpa-supplicant wpa-cli wpad-mesh wpad-mini wpad wpan-tools
-
 以太网卡: kmod-usb-core kmod-usb-net-asix-ax88179 kmod-usb-net-asix   kmod-usb-net-cdc-eem kmod-usb-net-cdc-ether kmod-usb-net-cdc-mbim kmod-usb-net-cdc-ncm   kmod-usb-net-cdc-subset kmod-usb-net-dm9601-ether kmod-usb-net-hso kmod-usb-net-huawei-cdc-ncm kmod-usb-net-ipheth kmod-usb-net-kalmia kmod-usb-net-kaweth kmod-usb-net-mcs7830 kmod-usb-net-pegasus kmod-usb-net-qmi-wwan kmod-usb-net-rndis
-
 kmod-usb-net-sierrawireless kmod-usb-net-smsc95xx kmod-usb-net
+
 12.  乐扩USB2.0有线网卡 USB转RJ45，网络适配器MCS7830芯片
 13.  UNITEK Y-1466 USB百兆网卡（芯片应该是ASIX AX88772C） x1
 14.  USB网卡作为WAN口，从现有路由器自动获取IP。
