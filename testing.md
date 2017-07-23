@@ -28,4 +28,27 @@ $                       移到当前行的最后一个字符
 > 配置ip地址，route，解决br-lan与eth0之间的问题
 1.  route修改,route add -net 192.168.1.0 netmask 255.255.255.0 dev eth0
 route add -net 0.0.0.0/0 gateway 192.168.1.1
-2.  
+2.  -net，表示后面接的路由为一个网段；
+-host，表示后面接的为连接到单台主机的路由；
+Netmask，和网段有关，能设置 netmask 决定网段的大小；
+Gw，gateway的简写，后续接的是 IP 的数值，和 dev 不同；
+Dev，只是要指定由哪一块网卡联机出去时使用这个设置，后面接eth0 等。
+3.  //添加到主机的路由
+route add –host 192.168.1.11 dev eth0
+route add –host 192.168.1.12 gw 192.168.1.1
+//添加到网络的路由
+route add –net 192.168.1.11  netmask 255.255.255.0 eth0
+route add –net 192.168.1.11  netmask 255.255.255.0 gw 192.168.1.1
+route add –net 192.168.1.0/24 eth1
+//添加默认网关
+route add default gw 192.168.2.1
+//删除路由
+route del –host 192.168.1.11 dev eth0
+4.  U Up表示此路由当前为启动状态
+H Host，表示此网关为一主机
+G Gateway，表示此网关为一路由器
+R Reinstate Route，使用动态路由重新初始化的路由
+D Dynamically,此路由是动态性地写入
+M Modified，此路由是由路由守护程序或导向器动态修改
+! 表示此路由当前为关闭状态
+5.  
