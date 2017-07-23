@@ -137,7 +137,7 @@ config wifi-iface
 /etc/config/firewal
 
 ````
- #open ssh on wan interface
+#open ssh on wan interface
 config rule                
         option src              wan
         option dest_port        22
