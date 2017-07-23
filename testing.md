@@ -83,8 +83,9 @@ kmod-usb-net-sierrawireless kmod-usb-net-smsc95xx kmod-usb-net
 无线网卡与LAN属同一网段，DHCP派发范围相同。
 15.  安装USB网卡驱动：opkg install kmod-usb-net-asix
 16.  下载镜像，这个lede好像是openwrt的一个分支，openwrt本身还没有支持pi3，https://downloads.lede-project.org/snapshots/targets/brcm2708/bcm2710/lede-brcm2708-bcm2710-rpi-3-ext4-sdcard.img
-17.  修改/etc/config/network	
-``` network
+17.  修改/etc/config/network
+	
+``` 
 config interface 'loopback'
         option ifname 'lo'
         option proto 'static'
@@ -105,4 +106,41 @@ config interface 'lan'
 config interface wan
         option proto dhcp
         option ifname eth0
+      
+````
+
+18.  修改wireless
+
+````
+config wifi-device radio0
+        option type     mac80211
+        option channel  11
+        option hwmode   11g
+        option path     'platform/soc/3f300000.mmc/mmc_host/mmc1/mmc1:0001/mmc1:0001:1'
+        option htmode   HT20
+        # REMOVE THIS LINE TO ENABLE WIFI:
+        option disabled 0
+
+config wifi-iface
+        option device   radio0
+        option network  lan
+        option mode     ap
+        option ssid     OpenWrt_RPI3
+        option encryption psk2
+        option key      yourwifikey
+````
+19.  opkg install luci
+/etc/init.d/uhttpd start
+/etc/init.d/uhttpd enable
+20.  允许通过wan连接ssh
+
+/etc/config/firewal
+
+````
+ #open ssh on wan interface
+config rule                
+        option src              wan
+        option dest_port        22
+        option target           ACCEPT     
+        option proto  
 ````
