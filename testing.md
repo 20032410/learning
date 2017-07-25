@@ -172,4 +172,6 @@ config wifi-iface
 ````
 
 
-23.  
+### 20170724
+1. Bus 001 Device 011: ID 1a86:e092 QinHeng Electronics,CH9200 USB Ethernet
+2. 
