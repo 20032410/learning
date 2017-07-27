@@ -174,4 +174,109 @@ config wifi-iface
 
 ### 20170724
 1. Bus 001 Device 011: ID 1a86:e092 QinHeng Electronics,CH9200 USB Ethernet
-2. 
+
+### 201725
+1. 使用wpa_supplicant连接使用wlan0
+2. 一：所用命令
+
+dmesg | grep firmware（看看有没有来自无线网卡的固件请求）
+
+iw：
+
+     iw dev(查找无线网卡口)
+
+     iw wls1 link(查看wls1网口无线网络连接情况)
+
+     iw wls1 scan | grep SSID(查看wls1网口可连接的wifi)
+
+ip：
+
+     ip link set wls1 up(将无线网口wls1开启)
+
+     ip link show wls1(显示无线网口wls1连接情况)
+
+     ip addr  show wls1(显示分配的ip地址，特别适用于查看是否成功地通过dhcp自动获取了ip地址) 
+
+wpa_supplican:
+
+     wpa_supplicant -B -i wlp3s0 -c <(wpa_passphrase "ssid" "psk") (连接无线网ssid，密码psk)
+
+dhclient:
+
+     dhclient wls1(为wls1分配ip地址)
+
+如需使用上述命令，只需将wls1直接更换成自己网口就
+
+
+        查看是否需要安装固件
+
+        大多无线网卡还需要固件。内核一般会自动探测并加载两者，如果您得到类似 SIOCSIFFLAGS: No such file or directory 的输出，意味着您得手动加载固件。若不确定，用 dmesg 查询内核日志，看看有没有来自无线网卡的固件请求。比如您有 Intel 芯片组，输出大概是这样：
+        # dmesg | grep firmware
+        firmware: requesting iwlwifi-5000-1.ucode
+        若无输出，表明系统的无线芯片不需要固件。
+
+        查看无线网口：
+
+        #iw dev(interface后面即为无线网口号)
+
+        激活无线网络接口：
+        # ip link set wls1 up 
+        为了检验接口是否激活成功，您可以查看以下命令的输出：
+        # ip link show wls1
+        3: wls1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state DOWN mode DORMANT group default qlen 1000 link/ether 00:11:22:33:44:55 brd ff:ff:ff:ff:ff:ff 
+        <BROADCAST,MULTICAST,UP,LOWER_UP> 中的UP 表明该接口激活成功，后面的 state DOWN 无关紧要。
+
+        查看无线网络连接情况：
+
+        #iw wls1 link
+        刚开始应该会显示无连接
+
+        扫描可连接的wifi
+        #iw wls1 scan | grep SSID
+
+        扫描可用的网络
+
+        连接指定的SSID
+        # wpa_supplicant -B -i wlp3s0 -c <(wpa_passphrase "ssid" "psk") 
+        将ssid 替换为实际的网络名称，psk 替换为无线密码，请保留引号。
+
+        用dhcp 获得 IP 分配：
+        # dhclient wlp3s0 
+
+        测试是否成功地从路由器获取了ip(重要)
+
+        #ip addr  show wls1
+
+        如果分配有ip，即可上网，也可以有ping直接测试                .conf3. 
+3. 配置/etc/etc/wpa_supplicant/etc/wpa_supplicant.conf
+4. wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf
+
+````
+root@LEDE:/etc/wpa_supplicant# cat wpa_supplicant.conf
+ctrl_interface=/var/run/wpa_supplicant
+update_config=1
+country=CN
+
+network={
+	ssid="AndroidAPli078"
+	psk="12345678"
+	key_mgmt=WPA-PSK
+	disabled=1
+}
+````
+5. 在luci配置界面上，进行无线搜索，在指定的wifi下连接
+
+### 20170726
+1. 将openwrt wifi，wlan0配置为802.11s
+2. upported interface modes:
+		 * IBSS
+		 * managed
+		 * AP
+		 * AP/VLAN
+		 * monitor
+		 * mesh point
+		 * P2P-client
+		 * P2P-GO
+		 
+3. mesh 第9频道
+4. 
