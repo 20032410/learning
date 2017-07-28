@@ -279,4 +279,79 @@ network={
 		 * P2P-GO
 		 
 3. mesh 第9频道
-4. 
+
+### 20170727
+1. 配置mesh
+iw phy phy0 interface add mesh0 type mesh
+iw dev mesh0 set meshid mymesh
+iw dev mesh0 set channel 3 HT40+
+ifconfig mesh0 hw ether 00:1C:11:11:11:11
+ifconfig mesh0 up
+
+设置iw mesh的网络接口及mp模式
+2. iw dev wlan1 interface add mesh_iface type mp
+3. ifconfig -a | grep mesh_iface
+4. iw dev mesh_iface set channel 1
+5. iw dev mesh_iface set meshid mymesh
+6. ifconfig mesh_iface 192.168.2.140
+7. ifconfig mesh_iface 192.168.2.130
+
+config wifi-device 'radio1'
+	option type 'mac80211'
+	option hwmode '11g'
+	option path 'platform/soc/3f980000.usb/usb1/1-1/1-1.4/1-1.4:1.0'
+	option htmode 'HT20'
+	option country '00'
+	option channel '1'
+
+config wifi-iface 'default_radio1'
+	option device 'radio1'
+	option network 'lan'
+	option mode 'ap'
+	option ssid 'LEDE_li130'
+	option encryption 'psk2'
+	option key 'li123456'
+	option wps_pushbutton '0'
+	
+9. config wifi-device 'radio1'
+	option type 'mac80211'
+	option hwmode '11g'
+	option path 'platform/soc/3f980000.usb/usb1/1-1/1-1.4/1-1.4:1.0'
+	option htmode 'HT20'
+	option country '00'
+	option channel '1'
+
+config wifi-iface 'default_radio1'
+	option device 'radio1'
+	option network 'lan'
+	option ssid 'LEDE_li130'
+	option key 'li123456'
+	option mode 'mesh'
+	option encryption 'none'
+
+10. mesh
+	 #!/bin/bash
+
+iw dev wlan1 interface add mesh_iface type mp
+iw dev mesh_iface set channel 1
+iw dev mesh_iface set meshid mymesh
+ifconfig mesh_iface 192.168.2.130
+
+11. 开启网卡监听模式
+ifconfig wlan2(网卡) down
+iwconfig wlan2 mode monitor( 设置为监听)
+ifconfig wlan2 up(开启网卡)
+iwconfig wlan2（查看信息）
+
+如果有线连接不可用, 需要使用这个功能，就要创建两个独立的虚拟网络接口。 可以通过如下方式为wlan0 创建负责网络连接的 wlan0_sta 和负责热点的 wlan0_ap. 两个虚拟网卡具有不同的 MAC 地址。
+iw dev wlan0 interface add wlan0_sta type managed addr 12:34:56:78:ab:cd  
+iw dev wlan0 interface add wlan0_ap  type managed addr 12:34:56:78:ab:ce
+
+可以用 macchanger 创建随机 MAC 地址。
+ip link set dev wlan0_ap up
+网络配置
+有两种基本的实现方法：
+网桥: 在电脑上搭一个网桥 （无线客户端就可以像电脑一样访问同一个网络接口和同一个子网）
+NAT: 通过 IP 转发/伪装和 DHCP 服务 （无线客户端会专门使用一个子网, 数据进出这个子网是被网络地址转换的(NAT-ted) —— 就像是连接在你数字用户回路(DSL)或铜轴线(Cabel)调制解调器上的一个普通的无线路由器一样)
+
+
