@@ -354,4 +354,125 @@ ip link set dev wlan0_ap up
 网桥: 在电脑上搭一个网桥 （无线客户端就可以像电脑一样访问同一个网络接口和同一个子网）
 NAT: 通过 IP 转发/伪装和 DHCP 服务 （无线客户端会专门使用一个子网, 数据进出这个子网是被网络地址转换的(NAT-ted) —— 就像是连接在你数字用户回路(DSL)或铜轴线(Cabel)调制解调器上的一个普通的无线路由器一样)
 
+### 20170730
+1. $ ifconfig wlan0 down
+$ iw dev wlan0 del
+$ iw phy phy0 interface add wlan0 type __ap
+$ ifconfig wlan0 up
+
+2. iw phy phy1 interface add mesh0 type mesh
+3. iw：
+
+     iw dev(查找无线网卡口)
+
+     iw wls1 link(查看wls1网口无线网络连接情况)
+
+     iw wls1 scan | grep SSID(查看wls1网口可连接的wifi)
+
+ip：
+
+     ip link set wls1 up(将无线网口wls1开启)
+
+     ip link show wls1(显示无线网口wls1连接情况)
+
+     ip addr  show wls1(显示分配的ip地址，特别适用于查看是否成功地通过dhcp自动获取了ip地址) 
+
+wpa_supplican:
+
+     wpa_supplicant -B -i wlp3s0 -c <(wpa_passphrase "ssid" "psk") (连接无线网ssid，密码psk)
+
+dhclient:
+
+     dhclient wls1(为wls1分配ip地址)
+
+如需使用上述命令，只需将wls1直接更换成自己网口就行了
+iw phy phy0 interface add moni0 type monitor
+iw phy phy0 interface add wlan10 type managed
+iw dev wlan0 interface add fish0 type monitor flags none
+如何在mesh的基础上桥接网络？
+Mesh Portal (MPP) 
+To bring up an MPP we need to setup up a bridge between a mesh interface and, for example, an Ethernet interface.
+1. Bring up a mesh interface as described in the "Testing" section above.
+mpp$ iw dev wlan0 interface add mesh type mp mesh_id ${MESH_ID}
+mpp$ ifconfig mesh up
+2. Add this new interface and your ethN interface to a new bridge:
+mpp$ brctl addbr br0
+mpp$ brctl stp br0 off
+mpp$ brctl addif br0 eth1
+mpp$ brctl addif br0 mesh
+mpp$ ifconfig mesh down
+mpp$ ifconfig eth1 down
+mpp$ ifconfig mesh 0.0.0.0 up
+mpp$ ifconfig eth1 0.0.0.0 up
+mpp$ ifconfig br0 ${MESH_IP}
+如何设置桥接
+root@bridge:~> brctl addbr br0
+root@bridge:~> brctl stp br0 off
+root@bridge:~> brctl addif br0 eth0
+root@bridge:~> brctl addif br0 eth1
+root@bridge:~> ifconfig eth0 down
+root@bridge:~> ifconfig eth1 down
+root@bridge:~> ifconfig eth0 0.0.0.0 up
+root@bridge:~> ifconfig eth1 0.0.0.0 up
+root@bridge:~> ifconfig br0 10.0.3.129        
+
+4. hostapd: 用于建立AP的用户空间程序（hostapd is a user space daemon for access point and authentication servers）
+iw: 一个基于nl80211的命令行控制程序（iw is a new nl80211 based CLI configuration utility for wireless devices. It supports almost all new drivers that have been added to the kernel recently）
+iwconfig / iwlist / iwpriv: 一系列基于Linux Wireless Extension的无线配置工具（Wireless tools for Linux is a package of Linux commands (simple text-based utilities/tools) intended to support and facilitate the configuration of wireless devices using the Linux Wireless Extension.）
+
+5.
+iw dev wlan1 del
+iw phy phy1 interface add mesh0 type mesh
+iw dev mesh0 set meshid mymesh
+iw dev mesh0 set channel 3 HT40+
+ifconfig mesh0 hw ether 00:1C:11:11:11:11
+ifconfig mesh0 up
+ifconfig mesh0 192.168.2.140
+iw dev mesh station dump
+
+iw dev wlan1 del
+iw phy phy1 interface add mesh0 type mesh
+iw dev mesh0 set meshid mymesh
+iw dev mesh0 set channel 1
+ifconfig mesh0 hw ether 00:1C:11:11:11:12
+ifconfig mesh0 up
+ifconfig mesh0 192.168.2.140
+
+6. 设置桥接
+如何设置桥接
+root@bridge:~> brctl addbr br0
+root@bridge:~> brctl stp br0 off
+root@bridge:~> brctl addif br0 eth0
+root@bridge:~> brctl addif br0 eth1
+root@bridge:~> ifconfig eth0 down
+root@bridge:~> ifconfig eth1 down
+root@bridge:~> ifconfig eth0 0.0.0.0 up
+root@bridge:~> ifconfig eth1 0.0.0.0 up
+root@bridge:~> ifconfig br0 10.0.3.129  
+
+7. 通过修改iptables来实现网卡之间ip数据流交换
+		#!/bin/bash
+		#edit by lielieli 20170730
+iptables -F
+iptables -X
+iptables -t nat -A POSTROUTING -o mesh0 -j MASQUERADE
+iptables -A FORWARD -i mesh0 -o br-lan -j ACCEPT
+iptables -A FORWARD -i br-lan -o mesh0 -j ACCEPT
+iptables -L -n
+printf "done\n"
+
+8. d单个Wi-Fi设备同时作为无线客户端和AP
+	Wiphy phy1
+...
+        valid interface combinations:
+                 * #{ managed } <= 2048, #{ AP, mesh point } <= 8, #{ P2P-client, P2P-GO } <= 1,
+                   total <= 2048, #channels <= 1, STA/AP BI must match
+...
+
+9. 约束#channels <= 1说明软件热点必须和 Wi-fi 客户端连接处于同一信道。 参见channel里的hostapd.conf设置。
+如果有线连接不可用, 需要使用这个功能，就要创建两个独立的虚拟网络接口。 可以通过如下方式为wlan0 创建负责网络连接的 wlan0_sta 和负责热点的 wlan0_ap. 两个虚拟网卡具有不同的 MAC 地址。
+	 iw dev wlan0 interface add wlan0_sta type managed addr 12:34:56:78:ab:cd 
+	 iw dev wlan0 interface add wlan0_ap  type managed addr 12:34:56:78:ab:ce
+10.  
+
 
