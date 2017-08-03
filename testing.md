@@ -473,6 +473,48 @@ printf "done\n"
 如果有线连接不可用, 需要使用这个功能，就要创建两个独立的虚拟网络接口。 可以通过如下方式为wlan0 创建负责网络连接的 wlan0_sta 和负责热点的 wlan0_ap. 两个虚拟网卡具有不同的 MAC 地址。
 	 iw dev wlan0 interface add wlan0_sta type managed addr 12:34:56:78:ab:cd 
 	 iw dev wlan0 interface add wlan0_ap  type managed addr 12:34:56:78:ab:ce
-10.  
+
+### 20170731
+
+1. 启用 NAT
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+2. 导出 NAT 规则至文件
+iptables-save > /etc/iptables/ap.rules
+3. 重启保存
+ifconfig wlan0 192.168.0.1/24
+systemctl start dnsmasq
+iptables-restore < /etc/iptables/ap.rules
+sysctl net.ipv4.ip_forward=1
+systemctl start hostapd
+4.
+
+### 20170801
+ifconfig wlan0 down
+ifconfig wlan0 10.0.0.1 netmask 255.255.255.0 up
+iwconfig wlan0 power off
+service dnsmasq restart
+hostapd -B /etc/hostapd/hostapd.conf & > /dev/null 2>&1
+sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE  
+sudo iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT  
+sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+
+### 20170803
+1. Android应用安装涉及到如下几个目录：
+system/app系统自带的应用程序，无法删除。
+data/app用户程序安装的目录，有删除权限。安装时把apk文件复制到此目录。
+data/data存放应用程序的数据。
+data/dalvik-cache将apk中的dex文件安装到dalvik-cache目录下(dex文件是dalvik虚拟机的可执行文件,其大小约为原始apk文件大小的四分之一)。
+
+2. 网络基本流程介绍
+	* 明确需求
+	* 现场工勘
+	* 网络方案设计
+	+ 售前测试、售前测试报告、无线地勘报告、走线，投标文件
+	+ 施工队
+	
+
+
 
 
