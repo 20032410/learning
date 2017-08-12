@@ -2,7 +2,7 @@
 
 ### 网页
 	学习git最基础书籍
-	Raspberry Pi 上的[分布式网络][https://linux.cn/article-8499-1.html]
+	Raspberry Pi 上的[分布式网络](https://linux.cn/article-8499-1.html)
 
 	我通过 kubeadm 发现了 Weave Net。Weave Mesh 是一个有趣的分布式网络解决方案，因此我开始了解更多关于它的内容。在 2016 年 12 月，我在 Weaveworks 收到了第一份合同工作，我成为了 Weave Net 中 ARM 支持团队的一员。
 
