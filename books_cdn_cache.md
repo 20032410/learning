@@ -11,5 +11,7 @@
 
 #### 20170818
 1. t is becoming understood that network operators will take advantage of some of the already developed advanced technologies — including software-de- fined networking (SDN) and network functions virtualization (NFV) — to implement efficient network slicing
-2. 
+2. Facilitated by the all-IP nature of contemporary 3GPP Long Term Evolution (LTE) cellular net- works, two types of locations appear attractive for deploying 5G-grade caches [12]:	* The Evolved Packet Core (EPC), which consists of the serving gateway (S-GW), the packet data network gateway (P-GW), and the mobility management entity (MME)	* The RAN, which features evolved NodeB (eNodeB) BSs
+3. his is mainly due to the fact that not only wired links accessing servers, but also backhaul links between the radio access network (RAN) and core network (CN) as well as wireless links for user equipments (UEs) in RANs may be the bottleneck, which limits the achievable date rate. 
+4. 
 

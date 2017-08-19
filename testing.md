@@ -545,6 +545,25 @@ data/dalvik-cache将apk中的dex文件安装到dalvik-cache目录下(dex文件�
 3. TJ武器工业
 4. 战场感知是随着信息技术特别是探测技术的发 展、信息优势等概念的形成,以及新军事革命理论 的深化而产生的新概念。战场感知(battlefield awareness,BA)是指参战部队和支援保障部队对战 场空间内敌、我、友各方的兵力部署、武器配备和 战场环境(如地形、气象和水文)等信息的实时掌握 过程。战场感知除了具有传统的侦察、监视、情报、 目标指示与毁伤评估等内涵以外,最大特点在于信 息共享和信息资源的管理与控制。为了提高部队的 战场感知能力,各军事强国都很重视战场感知技术, 投入巨资研制相关系统[8-9]。
 5. 传感系 统的智能化要求传感器具有以下功能:1) 智能传感 器是嵌入式微型处理器,要求在很小的传感器中嵌 入能存储、分发、处理和传输信息的芯片,对技术 和材料要求很高,而且还要保证低成本;2) 智能传 感器要有很强的自生能力,包括能供给其自身消耗 的能量,在复杂的战场环境里能够自组网和自定位; 3) 战场复杂电磁环境对传感器的影响越来越大,一 旦遭到敌方破坏或利用,智能传感器要具有自毁能 力,部分传感器节点的毁坏或退出网络不会影响整 个网络的运行。
+
+### 20170819
+1. 李贤烈, 刘捂林, 何海光. 基于 ZigBee 的移动物联网温度采集系统设计与实现[J]. 无线通信技术, 2016, 25(2): 42-45.
+MLA	
+	* 通过google学术，引用文献、
+2. npm install xxx 安装模块
+
+npm install xxx -g 将模块安装到全局环境中 参考http://goddyzhao.tumblr.com/post/9835631010/no-direct-command-for-local-installed-command-line-modul
+
+npm ls 查看安装的模块及依赖
+
+npm ls -g 查看全局安装的模块及依赖
+
+npm uninstall xxx  (-g) 卸载模块
+
+npm cache clean 清理缓存
+3. The link state routing protocol that is most popular today in the open source world is OLSR from olsr.org. OLSR with Link Quality (LQ) extension and fisheye-algorithm works quite well.
+4. Our testbed is composed of five Raspberry Pi B+ [14]. The Raspberry Pi is a credit card-sized single-board computer developed by the Raspberry Pi Foundation. The operating system mounted on these machines is OpenWrt version Chaos Calmer (r43006) with kernel 3.14.18 [15].
+5. The Iperf was originally developed by NLANR/DAST as a modern alter- native for measuring TCP and UDP bandwidth performance.The Iperf allows the tuning of various parameters and UDP characteristics.
 6. 
 	
 
