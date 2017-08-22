@@ -564,7 +564,57 @@ npm cache clean 清理缓存
 3. The link state routing protocol that is most popular today in the open source world is OLSR from olsr.org. OLSR with Link Quality (LQ) extension and fisheye-algorithm works quite well.
 4. Our testbed is composed of five Raspberry Pi B+ [14]. The Raspberry Pi is a credit card-sized single-board computer developed by the Raspberry Pi Foundation. The operating system mounted on these machines is OpenWrt version Chaos Calmer (r43006) with kernel 3.14.18 [15].
 5. The Iperf was originally developed by NLANR/DAST as a modern alter- native for measuring TCP and UDP bandwidth performance.The Iperf allows the tuning of various parameters and UDP characteristics.
-6. 
+
+### 20170820
+	The Content Centric Networks (CCN) replaces the IP narrow waist of the Internet architecture by a content layer. When a node wants to access a piece of content, it sends an Interest packet to the network. The network then, using the name of the content for routing, forwards the Interest to one or more copies of the content object. In this paper, we present the implementation of a OpenWRT OS based testbed for CCN. We analyze the performance of Optimized Link State Routing (OLSR) protocol in an indoor scenario. We transmitted single ICMP flow over UDP. For evaluation we considered hop count, delay and jitter metrics. The experimental results show that the nodes in the testbed were communicating smoothly and we got low values of delay and jitter.
+	here are some other research works done for Wire- less Mesh Networks (WMNs). In [17], the authors present the architecture, security, and management of SwanMesh
+	The link state routing protocol that is most popular today in the open source world is OLSR from olsr.org. OLSR with Link Quality (LQ) extension and fisheye-algorithm works quite well. 
+	The operating systems mounted on these machines are Open- WRT version Chaos Calmer (15.05, r46767) with kernel 3.18.20 
+	
+	
+	In order to further education in embedded discovery, Protomesh (prototype mesh) seeks to improve the field by providing a wireless solution for deploying Raspberry Pi workshops. Protomesh is a platform for starting up a quick ad-hoc batman-adv network. Batman-adv is an open source, kernel module native to Linux that provides a layer two mesh network routing protocol [2]. We leveraged this technology during Raspberry Pi workshops to use as a wireless infrastructure where students could freely access their Raspberry Pi across the mesh network. Network technologies such as this provide both an interactive and enriching experience. Protomesh enhances this experience by providing a solution for wireless connections and removing the burden of tethered Raspberry Pis. By allowing students to experience Raspberry Pi’s wirelessly, students are enabled to explore a new horizon of embedded education.
+	
+	BATMAN advanced;
+	
+	Protomesh is the in-house developed mesh deployment tool to assist us in manipulating a Batman-adv network across several nodes.
+	
+	In the future, we hope to integrate Protomesh into the ARCAM-Net (Advance Radio Communication Ad-hoc Mesh Network) project at the school. ARCAM-Net was a feasibility study on a Software Defined Radio (SDR) Network that ran on Batman-adv.
+	
+#### Throughput Evaluation of Raspberry Pi Devices on Multihop and Multiflow Wireless Sensor Network
+	bstract—The Raspberry Pi has become one of the most popular devices used in the internet of things studies because of its flexibility and affordability for prototyping purposes. It has found its niche in wireless sensor networks as it can function both as sensor node and router node just by adding wireless adapter. Studies have employed the Raspberry Pi as WSN mesh node and sensor node. These studies looked on the performance of these devices on single flow of data and/or on limited number of hops. Indirectly, they say these devices performs poorly on multihop and multi-flow experimental scenarios. 
+	
+	To address the issues above studies[7] have used the Raspberry Pi [6] acting as a sensor node and mesh node in a WSN. 
+	
+	Most studies[9][10] involving IOT are mostly done through simulation software like Network Simulator 2 and Network Simulator 3 (NS2 & NS3) [13][14]. However it is difficult to capture the complexity of wireless communications in real environment in simulations[16]. 
+	
+	Raspberry Pi devices are among the most suited as wireless mesh node, capable of multi hop, self-healing, and a communication range of around 170 m[14].
+	
+	实施过程：
+	1. Device Assembly
+	2. OLSR package installation
+	3. Iperf package installation
+	4. Configuration
+	
+	测试：
+	1. one hop, one flow scenario
+	R2 and R1’s throughput using the command “iperf -c 192.168.10.1xx -t 10”. This was replicated for 20 times.
+	2. two-hop, two-flow scenario
+	
+	
+	The steps to measure the throughput for each hop in the set up was similar to that of scenario 1. The raspberry pi’s sent a payload of 54Mbps over the network with UDP buffer size of 160kb and sending 1470 byte datagrams for 10 seconds. For the TCP test a tcp window size of 43.8 kb was used.
+	
+	wireless personal area networks (WPAN)
+	
+#### firechat
+	To monitor WiFi and Bluetooth FireChat communications, three devices were evaluated, each with particular strengths in each area. For WiFi, the HackRF One and WiFi Pineapple Nano were tested to discover the data that could be collected with each piece of hardware and the format of the collected data. To monitor Bluetooth Low Energy communication, the Ubertooth One presented the best opportunity to capture FireChat transmissions. 
+	
+	The Ubertooth One monitors Bluetooth and Bluetooth Low Energy (BLE) traffic. This device has a low price of $120 compared to other Bluetooth monitoring equipment that can cost thousands of dollars. 
+	
+	A free device exploration software tool, Blucat, that could be implemented on a Raspberry Pi was used with the Bluetooth receiver in a laptop to discover nearby devices, determine what services on the devices were using Bluetooth, find the RSSI of devices, and monitor FireChat transmissions. 
+	
+	Out of a list of researched software defined radios (SDRs), the HackRF One was chosen for prototyping for several reasons. First, it was one of three SDRs found that was capable of listening to a band of signals wide enough to encompass both the 2.4GHz and 5GHz wireless frequencies. Out of the three wide-band SDRs found, it was also by far the least expensive. 
+	
+	
 	
 
 
