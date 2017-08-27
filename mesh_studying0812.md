@@ -19,6 +19,26 @@
 * [使用arm开发板搭建无线mesh网络](https://www.bbsmax.com/A/gGdX7wnp54/)
 * 　　为了解决上述的问题，无线mesh网络应运而生。无线mesh网络从本质上讲，还是无线自组织网络（adhoc），只不过无线mesh网络在adhoc的基础上抽象出了一个骨干网（mesh）。不像adhoc网络那样，所有节点都由用户的终端设备承担，而且所有节点之间都是完全对等的关系，移动性很强。无线mesh网络的骨干网是由专门的网络设备（路由器等）组建的，而且组成骨干网的这些设备一般是不移动的或者是弱移动性的。这将解决掉上述adhoc网络所面临的很多问题。首先，骨干网节点由专门的路由设备来承担，这些路由设备不用处理用户的应用数据，只用来做路由转发的任务，因此所有的软硬件资源都是为路由转发服务的，因此可以承担大拓扑结构（大拓扑结构的网络首先需要网络设备具有足够大的存储空间来存储庞大的路由表，而且需要较强的处理器在路由表中随时查找或更新路由条目）、大数量的路由转发任务；其次，骨干网节点不移动，那么节点也不存在电力供应不足的问题，可以直接使用固定电源来供电，因此骨干网节点的这些设备在软硬件选择上，就不考虑功耗问题，性能无上限；再次，骨干网节点不移动，整个mesh网络拓扑将是稳定的，mesh网络的可靠性、应用的现实性也就具备了。下面给出adhoc网络和无线mesh网络的拓扑图示，以示其区别：
 
+### 20170822
+	There are a few software stacks to build a cloud system in ARM [5]. We are developing software stack to build virtual network suited for edge cloud.
+	Generally, in order to build a cloud system, both hardware virtualization and network virtualization are required.
+	There are several methods in network virtualization; VLAN (Virtual LAN), SDN (Software Defined Network) and so on. Especially, SDN is suited for large-scale network such as data center. Indeed, many data center employ SDN. There are 2 systems in SDN; OpenFlow and VXLAN. OpenFlow needs a few software stacks. So, it is suited for edge cloud.
+	
+	硬件可以通过以太网线，可以通过WiFi，通过蓝牙，ZigBee，RFID传输数据，又可以使用MQTT，HTTP，CoAP等各种协议，而且随着携带物联网芯片的物品的不断产生和消失，几乎不可能仅靠静态的设置来配置网络，物联网需要一个敏捷，灵活的网络。
+
+	There are 2 systems in SDN; OpenFlow and VXLAN. OpenFlow needs a few software stacks. So, it is suited for edge cloud.
+	Ryu(Python), Trema(Ruby/C) and Floodlight(Java) are OSS(Open Source Software) of OpenFlow Controller. We employ Ryu.
+	A server is not different from a client. Raspberry Pi has 100 base LAN NIC (Network Interface Card).
+	We measure RTT (Round Trip Time) using ping. 
+	
+### 电台--战术电台仿真模型研究
+	本文对电台模型在战术互联网仿真中的需求 进行了分析,建立了报文处理过程模型,采用模块 化的建模方式构建了通用电台仿真模型,详细描述 了仿真模型中各模块的功能,分析了仿真模型中的 传播模型和计算模型。通过 VRNET Developer 网络 仿真平台,以 VHF 电台为例,构建了仿真模型并在 移动和干扰条件下对仿真模型进行了仿真,仿真结 果表明,构建的仿真模型能够满足战术互联网仿真的通信要求。
+	·移动模块:负责仿真中节点的移动特性管理。 当电台位置发生变化后,该模块实时计算新的位置 坐标,及时提供给相应模块。其中包含的参数有:节 点的移动速度、节点速度更新间隔、节点平面运行 角度、节点控制范围、节点位置、节点位置更新间隔 等。·设备地址模块:进行数据设备地址(通常为 IPv4 地址)和电台 MAC 地址之间的映射。·状态检测模块:电台状态检测模块,根据电台 的参数设置,来判断电台是否处于使能状态。·通告板模块:用于模型内各模块之间的信息 交互。在节点内部,一些模块的信息可能为另外一 些模块所需要,若这些模块间直接进行交互,会造 成模型间的耦合度过高,不利于模型的扩展和重 用。因此,采用通告板模块来统一负责节点内部信 息的交互。·接口模块:用于电台传输速率接口的管理和 控制,主要有 K 接口和 E1 接口等。	·I P 配 置 模 块 :用 于 管 理 I P 接 口 的 模 块 ,在 具 备 IP 体系结构的电台模型中,识别节点内所有的网 络接口,为其分配 IP 地址,并作出相应的处理。
+	·基本电台模块:实现无线信道接入的模拟。其 中包含了电台的基本参数信息,主要有:载频、频率 带宽、发送数据率、调制方式、发送功率、接收灵敏 度、热噪声功率、天线高度、天线水平角、天线仰角、 路径损耗计算模型等。
+	·路由模块:分发路由协议信息,计算基于电台 MAC 地址的路由,对数据报文进行转发。
+	
+	
+
 
 
 
