@@ -614,6 +614,34 @@ npm cache clean 清理缓存
 	
 	Out of a list of researched software defined radios (SDRs), the HackRF One was chosen for prototyping for several reasons. First, it was one of three SDRs found that was capable of listening to a band of signals wide enough to encompass both the 2.4GHz and 5GHz wireless frequencies. Out of the three wide-band SDRs found, it was also by far the least expensive. 
 	
+	Based on the concept of opportunistic networks, new contact-based messaging applications have recently been de- veloped, such as FireChat (developed by Open Garden—http:// opengarden.com/FireChat/). FireChat, a messaging application meant for festivals, that became popular in 2014 in Iraq fol- lowing government restrictions on Internet use, and thereafter during the Hong Kong protests. There are other options, such as, Briar (see https://briarproject.org) and Netsukuku (http:// netsukuku.freaknet.org), and the so called Floating Content approach 
+	
+	Delay Differential Equations (DDEs). DDEs are similar to ODEs,
+
+### 20170829
+	树 莓 视 频 对 讲 使 用 了 一 些 工 具 :Netcat 传 输 视 频 与 音频 流 ,raspivid 和 m player 采 集 以 及 播 放 视 频 流 ,arecord 和 aplay 采 集 以 及 播 放 音 频 流 
+	
+	Mesh基站采用的是Strix公司的基站，系列产品利用并优化了802.11a/b/g/n技术，基于模块化硬件设计和成熟的自组网算法，可满足不同环境情况下视频、语音和数据多种业务传输的需要，是业界性能最高的无线Mesh网状网平台。
+	
+	AllJoyn是一个开放源码的软件系统，它为分布式应用程序在不同设备中提供了运行环境，特别是移动性、安全性和动态配置。AllJoyn系统处理了异构分布式系统中固有的难题，并解决了将移动性引入方程时所产生的独特问题。这使得应用开发人员可以将注意力集中到应用程序的核心问题上了。
+
+AllJoyn是一个“中性平台”，它被设计为相对于它运行的具体操作系统、硬件和设备尽可能的独立。事实上，AllJoyn是在Microsoft Windows、Linux和Android三种环境中开发出来的。
+
+AllJoyn始终秉承相邻性和移动性的设计理念。在移动环境下，设备将不断与其它的相邻设备连接和断开，并可以改变底层网络能力。
+
+AllJoyn作为一个开源项目遵守Apache Version 2.0 license授权。AllJoyn的代码库可以从http://www.alljoyn.org上获取。
+
+AllJoyn技术适用的应用程序类型只会受制于开发者的想象力。扩展社交网络就是其中一个例子。用户可以在配置文件中记录自己的喜好和兴趣。当进入其它位置后，具有这种AllJoyn功能的手机就会立即寻找附近其它具有类似兴趣的设备，并创建一个点对点的对等设备之间的通信网络，让它们进行沟通和信息交换。
+
+现在，大多数手机都集成了蓝牙功能，所以如果两个人处在同一个房间并开启了蓝牙，AllJoyn可以允许手机之间直接进行沟通，并允许应用程序进行交互（如果AllJoyn的安全系统允许）。例如，如果两个用户进入一个拥有Wi-Fi热点的家庭或办公室，他们的设备可以连接到底层接入点并充分利用额外的网络容量。此外，他们的设备还可以查找到邻近的其它设备（Wi-Fi的覆盖区域中），发现这些设备上的服务，如果需要的话还能使用这些服务。
+
+使用AllJoyn实现的另一个例子就是实时多玩家游戏。图1显示了如何使用不同设备和不同底层网络技术来实现多用户游戏。基础设备的详细管理都由AllJoyn处理，所以游戏作者可以把重点放在游戏的设计和开发上，而不是解决对等网络的复杂性。
+
+	AllJoyn准备作为Wi-Fi Hotspot 2.0技术的应用层，这种技术旨在提升手机和信号发射塔对Wi-Fi热点的漫游透明度
+	Wi-Fi Direct P2P发现规范
+	
+	
+	
 	
 	
 
