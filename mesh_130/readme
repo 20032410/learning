@@ -1,0 +1,8 @@
+##
+#
+iw list
+2. run mesh0.sh
+3. run mesh_eth0.sh
+4. mesh_eth0.sh
+5. cpe_33 for cpe ip
+6. mesh_brlan.sh for mac_book

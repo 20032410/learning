@@ -1,0 +1,1 @@
+cmd_/home/pi/ftp/CH9200_android-master/ch9x00.ko := ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/pi/ftp/CH9200_android-master/ch9x00.ko /home/pi/ftp/CH9200_android-master/ch9x00.o /home/pi/ftp/CH9200_android-master/ch9x00.mod.o ;  true

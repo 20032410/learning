@@ -1,0 +1,1 @@
+wpa_supplicant -B -i wlan0 -c < ("AndroidAP62" "12345678")
