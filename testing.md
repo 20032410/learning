@@ -732,7 +732,25 @@ ifconfig eth0 down
 ifconfig eth0 0.0.0.0 up
 brctl show
 
+***
+ 事实上，iPerf测试工具被嵌入到一些其它的网络流量分析工具中——包括底层LAN分析工具，如AirMagnet。比如，在下面的屏幕截图中显示了一个Wi-Fi笔记本上运行的AirMagnet作为iPerf客户端与安装在有线网络上的常规iPerf服务器进行交互的情况。
+***
+树莓派源
+地点 	提供者 	URL 	Rspb 	alarm 	deb 	lnr
+	搜狐 	http://mirrors.sohu.com/ 	✓ 	❌ 	✓ 	❌
+	阿里云 	http://mirrors.aliyun.com/ 	✓ 	❌ 	✓ 	❌
+安徽合肥 	中国科学技术大学 	http://mirrors.ustc.edu.cn/ 	✓[1] 	✓ 	✓ 	❌[5]
+辽宁大连 	大连东软信息学院 	http://mirrors.neusoft.edu.cn/ 	✓ 	❌ 	✓ 	❌
+湖北武汉 	华中科技大学 	http://mirrors.hust.edu.cn/ 	✓ 	✓ 	✓ 	❌
+广东广州 	中山大学 	http://mirror.sysu.edu.cn/ 	✓ 	✓ 	❌ 	❌
+北京海淀 	清华大学学生网管会 	http://mirrors.tuna.tsinghua.edu.cn/ 	✓
+### 20170908
+	先卸载sd卡然后修复一下
 
+在 emergency mode 下 用root账户登录
+执行 umount /dev/mmcblk0p2
+然后再执行 e2fsck -f -y -v -C 0 /dev/mmcblk0p2
+reboot
 
 
 	

@@ -298,7 +298,44 @@ ifconfig eth0 0.0.0.0 up
 brctl show
 
 
+### 2017.09.24
+	1. 各位的路由器很多都比较小，然而要塞入一个完整的py可能已经很勉强了，所以，就出现了Python-Mini这个软件包，可以在尽量小的尽可能实现py运行环境。
+那么就开始安装吧
+ssh登陆到路由器后台，然后执行
 
+opkg update
+opkg install python-mini
+
+然而安装了OpenWrt Chaos Calmer(15.05)及之后版本的同学需要安装另一个包（Python-Light）
+
+opkg update
+opkg install python-light
+
+这样就完成了一个最小的python环境的安装了
+如果你还需要其他的模块你可以直接opkg安装，例如你要openssl模块你就可以在终端执行
+
+opkg install ptyhon-openssl
+
+
+	2. opkg update
+
+1.安装python及ssl
+
+opkg install libffi
+
+opkg install python-mini
+
+opkg install python
+
+opkg install python-openssl
+
+2.安装pip
+
+wget –no-check-certificate https://bootstrap.pypa.io/get-pip.py
+
+python get-pip.py
+
+3.[老高的技术博客](https://blog.phpgao.com/xiaomi_router_python.html)
 
 
 
